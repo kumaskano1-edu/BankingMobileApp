@@ -1,5 +1,5 @@
 import React from 'react'
-import {createStackNavigator} from "@react-navigation/stack";
+import {createStackNavigator, useHeaderHeight} from "@react-navigation/stack";
 import Dashboard from "../screens/Dashboard";
 import Report from "../screens/Report";
 import Credits from "../screens/Credits";
@@ -24,6 +24,8 @@ const DashboardHeader = () => {
             headerTintColor: '#fff',
             headerTitleStyle: {
               fontWeight: 'bold',
+              fontSize: 25,
+              padding: 15,
             }
             }}>
             <Stack.Screen name="Dashboard" component={Dashboard} />
