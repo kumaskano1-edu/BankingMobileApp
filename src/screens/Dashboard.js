@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text,Image, FlatList, View } from 'react-native';
+import { StyleSheet, Text,Image, FlatList, Dimensions, View } from 'react-native';
 import {FontAwesome5} from "@expo/vector-icons";
 import { LinearGradient } from 'expo-linear-gradient';
+import { ScrollView } from 'react-native-gesture-handler';
+
+
+const { width, height } = Dimensions.get('window')
+
 const DATA = [{
     number: "2234 2213 4222 2444",
     cardholder: "Kumas Karaev",
@@ -42,75 +47,20 @@ const FancyHeader = () => {
     );
 }
 
-
-class CreditCardComponents extends Component {
-
-    renderItem = ({item}) => {
-        return(
-        <View style={styles.cardContainer}>
-            <View style={styles.Text_CardTypeImage}>
-                <Text style={styles.Title}>Current Balance</Text>
-                <FontAwesome5 name="cc-visa" light size={30} />
-            </View>
-            <View style={styles.CurrentBalance}>
-                <View style={styles.USD_Sign}>
-                    <Text color='#FFFFF'>USD</Text>
-                </View>
-                <Text style={styles.Balance}>{item.balance}</Text>
-            </View>
-            <View style={styles.CardNumberContainer}>
-                <Text style={styles.CardNumber}>{item.number}</Text>
-            </View>
-            <View style={styles.Cardholder_ExpiryDate}>
-                <Text>{item.cardholder}</Text>
-                <Text>{item.expire}</Text>
-            </View>
-        </View>
-        )
-    }
-    render() {
-        return(
-            <View>
-                <FlatList
-                data={DATA}
-                renderItem={this.renderItem}
-                keyExtractor={item => item.number}
-            />
-          </View>
-        );
-    } 
-}
-
-export default class Dashboard extends Component {
-    render() {
-        return (
-            <View>
-            <FancyHeader/>
-            <CreditCardComponents />
-            </View>
-        )
-    }
-}
-const styles = StyleSheet.create({
-    cardContainer: {
-        flex: 1,
-        backgroundColor: '#FFFFFF',
-        padding: '5%',
-        borderRadius: 22,
-        margin: 11,
-        marginLeft: '5%',
-        marginRight: '5%',
+const styles = StyleSheet.create({ 
+    CardBody: {
+       flex: 1,
+       width: width - 20,
+       height: height / 4,
+       backgroundColor: 'white',
+       margin: 10,
+       padding: 15,
+       borderRadius: 20,
     },
     Text_CardTypeImage: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        justifyContent: 'space-between'
     },
-    Title: {
-        fontSize: 17,
-        color: "lightgrey" 
-    },
-    CardTypeImage: {},
     CurrentBalance: {
         flexDirection: 'row',
     },
@@ -131,4 +81,55 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between'
     }
-})  
+});
+
+const CarouselCreditCard = ({item}) => {
+    return (
+    <View style={styles.CardBody}>
+        <View style={styles.Text_CardTypeImage}>
+            <Text style={styles.Title}>Current Balance</Text>
+            <FontAwesome5 name="cc-visa" light size={30} />
+        </View>
+        <View style={styles.CurrentBalance}>
+            <View style={styles.USD_Sign}>
+                <Text>USD</Text>
+            </View>
+            <Text style={styles.Balance}>{item.balance}</Text>
+        </View>
+        <View style={styles.CardNumberContainer}>
+            <Text style={styles.CardNumber}>{item.number}</Text>
+        </View>
+        <View style={styles.Cardholder_ExpiryDate}>
+            <Text>{item.cardholder}</Text>
+            <Text>{item.expire}</Text>
+        </View>
+    </View>
+    )
+}
+class CreditCardComponents extends Component {
+    render() {
+        return(
+            <View>
+                <FlatList data ={DATA} keyExtractor={(item, index) => 'key' + index} 
+                    horizontal scrollEnabled snapToAlignment='center' pagingEnabled 
+                    scrollEventThrottle={16}
+                    decelerationRate={"fast"}
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={({item}) => {
+                        return <CarouselCreditCard item={item} />
+                    }}/>
+            </View>
+        );
+    } 
+}
+
+export default class Dashboard extends Component {
+    render() {
+        return (
+            <View>
+            <FancyHeader />
+            <CreditCardComponents />
+            </View>
+        )
+    }
+}
