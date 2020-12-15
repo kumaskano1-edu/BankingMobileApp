@@ -23,9 +23,9 @@ const DashboardHeader = () => {
             ),
             headerTintColor: '#fff',
             headerTitleStyle: {
-              fontWeight: 'bold',
               fontSize: 25,
               padding: 15,
+              fontFamily: 'PopinsMedium'
             }
             }}>
             <Stack.Screen name="Dashboard" component={Dashboard} />

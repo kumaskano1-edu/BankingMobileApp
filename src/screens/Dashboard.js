@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { StyleSheet, Text,Image, FlatList, Dimensions, View } from 'react-native';
 import {FontAwesome5} from "@expo/vector-icons";
 import { LinearGradient } from 'expo-linear-gradient';
-
-
 const { width, height } = Dimensions.get('window')
 
 const DATA = [{
@@ -53,7 +51,7 @@ const FancyHeader = () => {
 
 const Constants = {
     marginTop: 10,
-    marginBottom: 12,
+    marginBottom: 10,
     largeFont: 20,
     mediumFont: 17 ,
     smallerFont: 10
@@ -76,8 +74,7 @@ const styles = StyleSheet.create({
     Title: {
         fontSize: 17,
         marginBottom: Constants.marginBottom,
-        fontWeight: '500',
-        color: 'grey'
+        color: 'grey',
     },
     CurrentBalanceContainer: {
         flexDirection: 'row',
@@ -90,19 +87,18 @@ const styles = StyleSheet.create({
     },
     USD_Sign_Text: {
         color: "white",
-        fontWeight: '700'
     },
     Balance: {
-        fontWeight: '700',
-        fontSize: 20,
+        fontSize: 22,
         margin: 2,
-        marginLeft: 5
+        marginLeft: 5,
+        fontWeight: '700'
     },
     CardNumberContainer: {
         marginBottom: Constants.marginBottom
     },
     CardNumber: {
-        fontSize: 20
+        fontSize: 22
     },
     Cardholder_ExpiryDate: {
         flexDirection: 'row',
