@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text,Image, FlatList, Dimensions, View } from 'react-native';
 import {FontAwesome5} from "@expo/vector-icons";
-import { LinearGradient } from 'expo-linear-gradient';
+import Theme from "../../config/MainTheme";
+import MyLinearGradient from "../components/styling/LinearGradient"
 const { width, height } = Dimensions.get('window')
 
 const DATA = [{
@@ -30,20 +31,7 @@ const FancyHeader = () => {
             width: '100%',
             height: '50%',
         }}>
-            <LinearGradient
-                  colors={[ '#17f9f2', '#b0f9a9']}
-                  style={{ flex: 1 }}
-                  start={{x: 0, y: 0}}
-                  end={{x: 1, y: 0}}
-                  style={
-                      { borderBottomLeftRadius: 40,
-                        borderBottomRightRadius: 40,
-                        width: '100%',
-                        height: '100%',
-                    }
-                  }
-                >
-            </LinearGradient>
+            <MyLinearGradient />
         </View>
 
     );
@@ -51,7 +39,7 @@ const FancyHeader = () => {
 
 const Constants = {
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 5,
     largeFont: 20,
     mediumFont: 17 ,
     smallerFont: 10
@@ -74,29 +62,39 @@ const styles = StyleSheet.create({
     Text_CardTypeImage: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     Title: {
         fontSize: 17,
-        marginBottom: Constants.marginBottom,
         color: 'grey',
+    },
+    CardImageIcon: {
+        width: 65,
+        height: 50,
+        resizeMode: "contain"
     },
     CurrentBalanceContainer: {
         flexDirection: 'row',
         marginBottom: Constants.marginBottom
     },
     USD_Sign: {
-        backgroundColor: '#17f9f2',
-        padding: 8,
-        borderRadius: 10
+        backgroundColor: Theme.mainColor,
+        padding: 4,
+        borderRadius: 10,
+        shadowOffset:{width: width-50, height: 2},
+        shadowOpacity: 3,
+        shadowRadius: 15,
+        elevation: 1.5
     },
     USD_Sign_Text: {
         color: "white",
+        paddingHorizontal: 6,
+        fontSize: 18
     },
     Balance: {
-        fontSize: 22,
+        fontSize: 24,
         margin: 2,
-        marginLeft: 5,
+        marginLeft: 10,
         fontWeight: '700'
     },
     CardNumberContainer: {
@@ -122,7 +120,7 @@ const CarouselCreditCard = ({item}) => {
     <View style={styles.CardBody}>
         <View style={styles.Text_CardTypeImage}>
             <Text style={styles.Title}>Current Balance</Text>
-            <FontAwesome5 name="cc-visa" light size={30} />
+            <Image style={styles.CardImageIcon} source={require("../../assets/media/dashboard/visa_icon.png")} />
         </View>
         <View style={styles.CurrentBalanceContainer}>
             <View style={styles.USD_Sign}>
@@ -131,7 +129,9 @@ const CarouselCreditCard = ({item}) => {
             <Text style={styles.Balance}>{item.balance}</Text>
         </View>
         <View style={styles.CardNumberContainer}>
-            <Text style={styles.CardNumber}>{item.number}</Text>
+            <Text style={styles.CardNumber}>{
+                '**** **** **** ' + item.number.substr(15,4)
+            }</Text>
         </View>
         <View style={styles.Cardholder_ExpiryDate}>
             <Text style={styles.cardholder}>{item.cardholder}</Text>
@@ -151,7 +151,7 @@ class CreditCardComponents extends Component {
                     snapToAlignment="center"
                     snapToInterval={width-25}
                     contentContainerStyle={{paddingHorizontal: 10}}
-                     scrollEventThrottle={50}
+                     scrollEventThrottle={200}
                      decelerationRate={"normal"}
                      showsHorizontalScrollIndicator={false}
                     renderItem={CarouselCreditCard} />

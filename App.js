@@ -7,7 +7,7 @@ import {setCustomText} from "react-native-global-props"
 //custom imports
 import {DashboardHeader, ReportHeader, CreditsHeader, ProfileHeader} from "./src/navigation/headerStackNavi";
 import * as Font from "expo-font";
-
+import Theme from "./config/MainTheme"
 const Tab = createMaterialBottomTabNavigator();
 
 export default class App extends Component{ 
@@ -34,7 +34,7 @@ export default class App extends Component{
   render() {
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="Dashboard" labeled={false} activeColor="#30beb2" barStyle={{height: 65, backgroundColor: "white"}}>
+      <Tab.Navigator initialRouteName="Dashboard" labeled={false} activeColor={Theme.secondaryColor} barStyle={{height: 65, backgroundColor: "white"}}>
         <Tab.Screen name="Dashboard" component={DashboardHeader} options={{
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="home" light color={color} size={20} />

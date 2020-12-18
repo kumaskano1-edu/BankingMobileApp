@@ -4,7 +4,8 @@ import Dashboard from "../screens/Dashboard";
 import Report from "../screens/Report";
 import Credits from "../screens/Credits";
 import Profile from "../screens/Profile";
-import { LinearGradient } from 'expo-linear-gradient';
+import Theme from "../../config/MainTheme";
+import MyLinearGradient from "../components/styling/LinearGradient"
 const Stack = createStackNavigator();
 
 //gradient color header
@@ -14,12 +15,7 @@ const DashboardHeader = () => {
     return (
         <Stack.Navigator screenOptions={{
             headerBackground: () => (
-                <LinearGradient
-                  colors={[ '#17f9f2', '#b0f9a9']}
-                  style={{ flex: 1 }}
-                  start={{x: 0, y: 0}}
-                  end={{x: 1, y: 0}}
-                />
+                <MyLinearGradient/>
             ),
             headerTintColor: '#fff',
             headerTitleStyle: {
