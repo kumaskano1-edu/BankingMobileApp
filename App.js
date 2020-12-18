@@ -17,8 +17,8 @@ export default class App extends Component{
       fontloaded: false
     }
   }
-  componentDidMount() {
-    Font.loadAsync({
+  async componentDidMount() {
+    await Font.loadAsync({
       'PopinsLight':require('./assets/fonts/Poppins-Light.ttf'),
       'PopinsBlack':require('./assets/fonts/Poppins-Black.ttf'),
       'PopinsMedium':require('./assets/fonts/Poppins-Medium.ttf')

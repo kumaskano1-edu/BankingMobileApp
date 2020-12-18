@@ -63,8 +63,13 @@ const styles = StyleSheet.create({
     CardBody: {
         backgroundColor: 'white',
         padding: 20,
-        width: width-40,
-        borderRadius: 15
+        width: width-45,
+        borderRadius: 15,
+        marginHorizontal: 10,
+        shadowOffset:{width: width-50, height: 2},
+        shadowOpacity: 5,
+        shadowRadius: 15,
+        elevation: 5
     },
     Text_CardTypeImage: {
         flexDirection: 'row',
@@ -140,14 +145,16 @@ class CreditCardComponents extends Component {
         return(
             <View styles={styles.Container}>
                 <FlatList data ={DATA} keyExtractor={(item, index) => 'key' + index} 
-                    horizontal scrollEnabled snapToAlignment='center' pagingEnabled 
-                    scrollEventThrottle={16}
+                    horizontal 
+                    scrollEnabled 
+                    pagingEnabled 
+                    snapToAlignment="center"
+                    snapToInterval={width-25}
                     contentContainerStyle={{paddingHorizontal: 10}}
-                    decelerationRate={"fast"}
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={({item}) => {
-                        return <CarouselCreditCard item={item} />
-                    }}/>
+                     scrollEventThrottle={50}
+                     decelerationRate={"normal"}
+                     showsHorizontalScrollIndicator={false}
+                    renderItem={CarouselCreditCard} />
             </View>
         );
     } 
