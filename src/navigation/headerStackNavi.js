@@ -21,7 +21,9 @@ const DashboardHeader = () => {
             headerTitleStyle: {
               fontSize: 25,
               padding: 15,
-              fontFamily: 'PopinsMedium'
+              letterSpacing: 2,
+              fontFamily: 'PopinsMedium',
+              fontWeight: "700"
             }
             }}>
             <Stack.Screen name="Dashboard" component={Dashboard} />

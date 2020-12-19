@@ -31,7 +31,9 @@ const FancyHeader = () => {
             width: '100%',
             height: '50%',
         }}>
-            <MyLinearGradient />
+            <MyLinearGradient style={{ 
+                         borderBottomLeftRadius: 35,
+                        borderBottomRightRadius: 35,}}/>
         </View>
 
     );
@@ -39,7 +41,7 @@ const FancyHeader = () => {
 
 const Constants = {
     marginTop: 10,
-    marginBottom: 5,
+    marginBottom: 9,
     largeFont: 20,
     mediumFont: 17 ,
     smallerFont: 10
@@ -50,14 +52,15 @@ const styles = StyleSheet.create({
     Container: {},
     CardBody: {
         backgroundColor: 'white',
-        padding: 20,
+        padding: 12,
+        paddingHorizontal: 20,
         width: width-45,
         borderRadius: 15,
         marginHorizontal: 10,
         shadowOffset:{width: width-50, height: 2},
-        shadowOpacity: 5,
+        shadowOpacity: 10,
         shadowRadius: 15,
-        elevation: 5
+        elevation: 10
     },
     Text_CardTypeImage: {
         flexDirection: 'row',
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
     },
     Title: {
         fontSize: 17,
-        color: 'grey',
+        color: '#D3D3D3',
     },
     CardImageIcon: {
         width: 65,
@@ -77,19 +80,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginBottom: Constants.marginBottom
     },
-    USD_Sign: {
-        backgroundColor: Theme.mainColor,
-        padding: 4,
-        borderRadius: 10,
-        shadowOffset:{width: width-50, height: 2},
-        shadowOpacity: 3,
-        shadowRadius: 15,
-        elevation: 1.5
-    },
     USD_Sign_Text: {
         color: "white",
-        paddingHorizontal: 6,
-        fontSize: 18
+        fontSize: 18,
+        padding: 10,
+        width: "100%", 
     },
     Balance: {
         fontSize: 24,
@@ -101,7 +96,8 @@ const styles = StyleSheet.create({
         marginBottom: Constants.marginBottom
     },
     CardNumber: {
-        fontSize: 22
+        fontSize: 22,
+        letterSpacing: 2.5
     },
     Cardholder_ExpiryDate: {
         flexDirection: 'row',
@@ -123,8 +119,12 @@ const CarouselCreditCard = ({item}) => {
             <Image style={styles.CardImageIcon} source={require("../../assets/media/dashboard/visa_icon.png")} />
         </View>
         <View style={styles.CurrentBalanceContainer}>
-            <View style={styles.USD_Sign}>
-                <Text style={styles.USD_Sign_Text}>USD</Text>
+            <View>
+                <MyLinearGradient style={{        elevation: 5
+, width:58, height:40, paddingVertical: 10, flexDirection: 'row', borderRadius: 12, justifyContent: 'center',
+        alignItems: 'center'}}>                
+                    <Text style={styles.USD_Sign_Text}>USD</Text>
+                </MyLinearGradient>
             </View>
             <Text style={styles.Balance}>{item.balance}</Text>
         </View>
